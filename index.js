@@ -3,8 +3,7 @@ const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 const jsonpatch = require("jsonpatch");
 const Jimp = require("jimp");
-const { response } = require("express");
-const download = require("image-downloader");
+
 
 var Db = require("./dboperations");
 const dboperations = require("./dboperations");
@@ -77,11 +76,10 @@ app.post("/api/thumbnail", verifyToken, (req, res) => {
         async function resize() {
           const image = await Jimp.read(req.body.url); // Read the image.
           await image.resize(50, 50); // Resize the image to width 150 and heigth 150.
-
-          await image.writeAsync(`./thumbnails/file.png`);
+          await image.writeAsync(`./thumbnails/file_${authData.user.username}.png`); // save image to file
         }
         resize();
-
+        
         response = "File saved in folder";
       }
 
