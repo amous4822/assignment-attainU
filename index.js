@@ -78,10 +78,10 @@ app.post('/api/thumbnail', verifyToken, (req, res) => {
                 response = "inside";
 
 
-                // const options = {
-                //     url: req.body.url,
-                //     dest: './thumbnails'                // will be saved to thumbnails folder
-                // }
+                const options = {
+                    url: req.body.url,
+                    dest: './thumbnails'                // will be saved to thumbnails folder
+                }
 
                 const setup = {
                     all: {
@@ -94,24 +94,11 @@ app.post('/api/thumbnail', verifyToken, (req, res) => {
                     }
                 }
   
-                // download.image(options)
-                // .then(({ filename }) => {
-                    
-                    
-                //     // try {
-                //     //     async () => {
-                //     //         await resizer(filename, setup)
-                //     //     }
-                //     // }
-                //     // catch(e) {
-                //     //     console.log('Catch an error: ', e)
-                //     // }
-
-
-                    
-                    
-                // })
-                // .catch((err) => console.error(err))    
+                download.image(options)
+                .then(({ filename }) => {
+                    console.log("saved in", filename)
+                })
+                .catch((err) => console.error(err))    
 
                 // (async () => {
                 //     await resizer('./thumbnails/1200px-Image_created_with_a_mobile_phone.png', setup)
